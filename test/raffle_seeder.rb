@@ -1,9 +1,9 @@
 require 'rubygems'
 require 'mongo'
 
-@db_name = 'rc_raffle'
-@items_coll = 'prizes'
-@bidders_coll = 'hopefuls'
+db_name = 'rc_raffle'
+items_coll = 'prizes'
+bidders_coll = 'hopefuls'
 
 db = Mongo::Connection.new.db(db_name)
 
