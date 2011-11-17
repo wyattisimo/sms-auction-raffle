@@ -15,6 +15,6 @@ db[items_coll].remove
     'number' => i,
     'name' => "Item #{i}",
     'info' => "This is the info for auction item #{i}.",
-    'bids' => 
+    'bids' => Array.new
   })
 end
