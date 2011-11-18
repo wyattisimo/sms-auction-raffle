@@ -14,11 +14,10 @@ end
 
 get %r{/stats/?} do
   auction = Auction.new('admin')
-  #raffle = Raffle.new('admin')
+  raffle = Raffle.new('admin')
   
+  # AUCTION DATA
   items = auction.get_all_items
-  
-  # create auction items object for the template to use
   @items = Array.new
   i = 0
   items.each do |item|
@@ -26,13 +25,29 @@ get %r{/stats/?} do
     b = 0
     item['bids'].each do |bid|
       bidder = auction.get_bidder(bid['bidder_phone'])
-      @items[i]['bids'][b]['bidder_name'] = "#{bidder['name']}"
+      @items[i]['bids'][b]['bidder_name'] = bidder['name']
       b += 1
     end
     @items[i]['bids'].sort_by! { |b| b['amount'] }
     @items[i]['bids'].reverse!
     @items[i]['high_bid'] = @items[i]['bids'].size > 0 ? @items[i]['bids'][0]['amount'] : 0
     i += 1
+  end
+  
+  # RAFFLE DATA
+  prizes = raffle.get_all_prizes
+  @prizes = Array.new
+  p = 0
+  prizes.each do |prize|
+    @prizes[p] = prize
+    b = 0
+    prize['bids'].each do |bid|
+      bidder = raffle.get_bidder(bid['bidder_phone'])
+      @prizes[p]['bids'][b]['bidder_name'] = bidder['name']
+      b += 1
+    end
+    @prizes[i]['bids'].sort_by! { |b| b['ts'] }
+    @prizes[i]['bids'].reverse!
   end
   
   haml :stats

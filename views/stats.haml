@@ -12,5 +12,10 @@
 		
 	#raffle
 		%h2 Raffle
-		%div data here
+		- @prizes.each do |p|
+			%h3
+				#{p['number'].to_i}. #{p['name']} | Number of tickets:
+				%strong #{p['bids'].size}
+			- p['bids'].each do |b|
+				.bid #{b['bidder_name']} (#{b['bidder_phone']}) -- Entered at: #{b['ts']} UTC
 		

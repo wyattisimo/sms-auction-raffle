@@ -33,6 +33,11 @@ prizes {
 	number: int
 	name: str
 	info: str
+	bids: [] {
+		ts: str
+		bidder_phone: str
+		quantity: int
+	}
 }
 
 hopefuls {

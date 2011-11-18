@@ -63,6 +63,21 @@ class Raffle
   end
   
   #
+  # returns the entire collection of prizes
+  #
+  def get_all_prizes
+    @db[@items_coll].find.sort('number')
+  end
+  
+  #
+  # returns the bidder specified by the given phone number
+  #
+  def get_bidder (phone)
+    @db[@bidders_coll].find_one({ 'phone' => phone })
+  end
+  
+  
+  #
   # returns the help msg
   #
   def get_help
