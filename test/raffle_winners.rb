@@ -20,7 +20,7 @@ db[items_coll].find.sort('number').each do |prize|
   
   # pick random ticket
   if prize['bids'].size > 0 then
-    r_index = rand(prize['bids'].size-1).round
+    r_index = rand(prize['bids'].size-1).floor
     puts "r_index: #{r_index}"
     winner = db[bidders_coll].find_one({ 'phone' => prize['bids'][r_index]['bidder_phone'] })
     puts "   WINNER: #{winner['name']} (#{winner['phone']})"
