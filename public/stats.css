@@ -16,13 +16,15 @@ h3 { color: #666; }
 
 strong { color: #c00; }
 
-.container {}
+.container {
+	padding: 20px 0 0 20px;
+}
 
 #auction, #raffle {
 	float: left;
 	border: 1px solid #999;
 	padding: 16px;
-	margin: 20px;
+	margin: 0 20px 20px 0;
 	background-color: #eee;
 	color: #000;
 	-webkit-border-radius: 10px;
