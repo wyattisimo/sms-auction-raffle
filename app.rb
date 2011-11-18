@@ -101,7 +101,7 @@ get %r{/raffle/sms/?} do
     response = raffle.get_help
 
   # register
-  when /^[a-z-.]+\s[a-z-.]+\s[a-z0-9]+$/i
+  when /^[a-z-.]+\s[a-z-.]+$/i
     info = msg.split ' '
     response = raffle.register("#{info[0]} #{info[1]}", info[2])
   
