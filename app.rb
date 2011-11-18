@@ -19,12 +19,12 @@ get %r{/stats/?} do
   @items = auction.get_all_items
   
   # add bidder names to the bids array
-  @items.each do |i|
-    i['bids'].each do |b|
-      bidder = auction.get_bidder(b['bidder_phone'])
-      b['bidder_name'] = bidder['name']
-    end
-  end
+  # @items.each do |i|
+  #   i['bids'].each do |b|
+  #     bidder = auction.get_bidder(b['bidder_phone'])
+  #     b['bidder_name'] = bidder['name']
+  #   end
+  # end
   
   haml :stats
 end
