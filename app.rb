@@ -31,6 +31,7 @@ get %r{/stats/?} do
     end
     @items[i]['bids'].sort_by! { |b| b['amount'] }
     @items[i]['bids'].reverse!
+    @items[i]['high_bid'] = @items[i]['bids'][0]['amount']
     i += 1
   end
   
