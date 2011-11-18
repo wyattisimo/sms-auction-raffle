@@ -2,6 +2,8 @@ body {
 	margin: 0;
 	padding: 0;
 	font-family: verdana, sans-serif;
+	background-color: #000;
+	color: #fff;
 }
 
 h1, h2, h3 {
@@ -9,17 +11,17 @@ h1, h2, h3 {
 	padding: 0;
 	font-family: "trebuchet ms", helvetica, sans-serif;
 }
-h2 { color: #556; }
-h3 { color: #06c; }
+h2 { color: #bbc; }
+h3 { color: #eef; }
 
-strong { color: #c00; }
+strong { color: #b00; }
 
 .container {
 	
 }
 
 #auction, #raffle {
-	border: 1px solid #ccc;
+	border: 1px solid #999;
 	padding: 16px;
 	margin: 20px;
 }
