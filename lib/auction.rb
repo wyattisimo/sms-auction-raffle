@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'mongo'
 require 'twilio-ruby'
-require 'local_settings'
+require './local_settings'
 
 #
 # handles all auction bidding functions
