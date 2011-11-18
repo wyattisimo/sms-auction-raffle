@@ -15,7 +15,7 @@ class Raffle
     
     @exception_msg = "Oh, snap. Something broke. Call 858 248 0841 for tech support."
     
-    @register_msg = "Thanks for participating in the Raise Cache raffle, %s! 100%% of proceeds go to hackNY. You currently have %d raffle ticket%s to spend. Text LIST to see a list of raffle prizes."
+    @register_msg = "Thanks for participating in the Raise Cache raffle, %s! 100%% of proceeds go to hackNY. You currently have %d raffle ticket%s to spend. Text LIST for prize list."
     @register_err = "Hi there! You're already registered. Text LIST to see a list of raffle prizes."
 
     @not_registered_msg = "You must register before you can participate in the raffle. Please register by texting your first and last name. Text HELP for help."
