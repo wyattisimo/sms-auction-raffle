@@ -22,7 +22,7 @@ db[items_coll].find.sort('number').each do |prize|
   r_index = rand(prize['bids'].size-1)
   puts "r_index: #{r_index}"
   winner = db[bidders_coll].find_one({ 'phone' => prize['bids'][r_index]['bidder_phone'] })
-  puts "   WINNER: #{winner['name']} (#{winnder['phone']})"
+  puts "   WINNER: #{winner['name']} (#{winner['phone']})"
   
   # list all tickets
   # prize['bids'].each do |bid|
