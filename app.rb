@@ -26,9 +26,11 @@ get %r{/stats/?} do
     b = 0
     item['bids'].each do |bid|
       bidder = auction.get_bidder(bid['bidder_phone'])
-      @items[i]['bids'][b]['bidder_name'] = "n.#{bidder['name']}"
+      @items[i]['bids'][b]['bidder_name'] = "#{bidder['name']}"
       b += 1
     end
+    @items[i]['bids'].sort_by! { |b| b['amount'] }
+    @items[i]['bids'].reverse!
     i += 1
   end
   
