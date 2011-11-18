@@ -118,8 +118,7 @@ get %r{/raffle/sms/?} do
   
   # apply raffle ticket
   when /^\d+$/
-    bid = msg.split ' '
-    response = raffle.apply_ticket(bid[0], bid[1].sub('$',''))
+    response = raffle.apply_ticket(msg)
   
   # get more tickets
   when /^GET\s\d+$/i
