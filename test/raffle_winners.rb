@@ -19,10 +19,12 @@ db[items_coll].find.sort('number').each do |prize|
   puts "#{prize['number']}. #{prize['name']}: #{prize['bids'].size} tickets entered"
   
   # pick random ticket
-  r_index = rand(prize['bids'].size-1)
-  puts "r_index: #{r_index}"
-  winner = db[bidders_coll].find_one({ 'phone' => prize['bids'][r_index]['bidder_phone'] })
-  puts "   WINNER: #{winner['name']} (#{winner['phone']})"
+  if prize['bids'].size > 0 then
+    r_index = rand(prize['bids'].size-1)
+    puts "r_index: #{r_index}"
+    winner = db[bidders_coll].find_one({ 'phone' => prize['bids'][r_index]['bidder_phone'] })
+    puts "   WINNER: #{winner['name']} (#{winner['phone']})"
+  end
   
   # list all tickets
   # prize['bids'].each do |bid|
