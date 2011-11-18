@@ -33,10 +33,10 @@ class Auction
 
     @confirm_bid_msg = "Thank you! Your bid of $%d for auction item %d (%s) is confirmed. We will let you know if you are the winner."
     @confirm_bid_cancel_msg = "Okay. We've cancelled your bid of $%d for auction item %d. Text LIST to see other auction items."
-    @confirm_bid_outbid_msg = "You've been outbid! The high bid for item %d is now $%d.\n* Text YES to automatically increase your bid to $%d.\n* Text [number] $[amount] to bid a different amount."
+    @confirm_bid_outbid_msg = "You've been outbid! The high bid for item %d is now $%d.\n*Text YES to automatically increase your bid to $%d.\n*Text [number] $[amount] to bid a different amount."
     @confirm_bid_exist_err = "You don't have any pending bids.\n* Text [number] $[amount] to bid."
     
-    @outbid_msg = "You've been outbid on item %d (%s)! High bid is now $%d."
+    @outbid_msg = "You've been outbid on item %d (%s)! High bid is now $%d.\n*Text [number] $[amount] to bid again."
     # end messages
     
     # max number of items to send when list is requested
