@@ -30,7 +30,7 @@ class Raffle
     @apply_err = "Invalid prize number. Text LIST to see a list of raffle prizes."
     @apply_no_tickets_err = "You don't have any tickets. Text GET [quantity] to purchase more. Raffle tickets are $1 each."
     
-    @add_msg = "Thanks! We're sending you a Venmo link for %d tickets. Your tickets will be added after you pay."
+    @add_msg = "Thanks! Pay for your raffle tickets here:"
     @add_err = ""
     # end messages
 
@@ -200,8 +200,6 @@ class Raffle
 
     bidder = @db[@bidders_coll].find_one({ 'phone' => @phone })
     
-    sprintf(@add_msg, qty)
-    
     #TODO send Venmo invoice for qty tickets
     #651-357-0214
     msg = "https://venmo.com/?txn=Pay&recipients=6513570214&amount=#{qty}&note=for%20RaiseCache%20Raffle"
@@ -209,7 +207,7 @@ class Raffle
     @client.account.sms.messages.create(
       :from => $raffle_number,
       :to => @phone,
-      :body => msg
+      :body => "#{@add_msg} #{msg}"
     )
   end
   
