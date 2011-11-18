@@ -125,11 +125,11 @@ class Auction
   def get_list(do_more)
     return @not_registered_msg unless self.is_valid_bidder
     
+    items = @db[@items_coll].find.sort('number')
     bidder = @db[@bidders_coll].find_one({ 'phone' => @phone })
     
     if do_more == true
       last_item = bidder['last_item'] == nil ? 0 : bidder['last_item']
-      items = @db[@items_coll].find
       last_item = 0 if last_item >= items.count
     else
       last_item = 0
@@ -138,7 +138,7 @@ class Auction
     more_msg = ''
     list = ''
     i = 0
-    @db[@items_coll].find.sort('number').each do |item|
+    items.each do |item|
       i = i+1
       if i > last_item then
         # add item to list
