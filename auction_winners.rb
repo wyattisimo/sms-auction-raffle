@@ -42,8 +42,8 @@ db[items_coll].find.sort('number').each do |item|
     
     # send Venmo invoice
     puts "   ...sending Venmo sms to the winner..."
-    venmo_msg = "https://venmo.com/?txn=Pay&recipients=6513570214&amount=#{high['amount']}&note=for%20RaiseCache%20Raffle"
-    puts "Please pay for your auction item here: #{venmo_msg}"
+    venmo_msg = "Please pay for your auction item here: https://venmo.com/?txn=Pay&recipients=6513570214&amount=#{high['amount']}&note=for%20RaiseCache%20Raffle"
+    puts "   #{venmo_msg}"
     # @client.account.sms.messages.create(
     #   :from => $auction_number,
     #   :to => winner['phone'],
