@@ -43,8 +43,8 @@ else
     
       # notify winner
       puts "   ...sending sms to the winner..."
-      msg = sprintf("Congratulations! You won a RaiseCache Raffle prize! (#{prize['name']})\nbla bla bla to redeem your prize.")
-      puts msg
+      msg = sprintf("Congratulations! You won a RaiseCache raffle prize! (#{prize['name']})\nbla bla bla to redeem your prize.")
+      puts "   #{msg}"
       # @client = Twilio::REST::Client.new $account_sid, $auth_token
       # @client.account.sms.messages.create(
       #   :from => $raffle_number,
