@@ -10,7 +10,7 @@
 			.bids
 				- count = 0
 				- i['bids'].each do |b|
-					- color = count == 0 ? '#c00' : 'inherit'
+					- color = count == 0 ? '#c00' : 'inherit'; count += 1;
 					.bid{:style => "color:#{color};"}
 						$#{b['amount']} -- #{b['bidder_name']} (#{b['bidder_phone']}) -- Placed at: #{b['ts']} UTC
 		
