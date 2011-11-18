@@ -37,6 +37,8 @@ class Auction
     @confirm_bid_exist_err = "You don't have any pending bids.\n* Text [number] $[amount] to bid."
     
     @outbid_msg = "You've been outbid on item %d (%s)! High bid is now $%d.\n*Text [number] $[amount] to bid again."
+    
+    @auction_closed_msg = "Thanks for participating! The RaiseCache auction is now closed. RaiseCache for hackNY was a huge success!"
     # end messages
     
     # max number of items to send when list is requested
@@ -158,6 +160,10 @@ class Auction
   def bid (item_number, amount)
     return @not_registered_msg unless self.is_valid_bidder
     
+    # CLOSED
+    return @auction_closed_msg
+    #
+    
     amount = amount.to_i # quietly convert decimals to integers
     item_number = item_number.to_i
     
@@ -188,6 +194,10 @@ class Auction
   #
   def confirm_bid (confirm)
     return @not_registered_msg unless self.is_valid_bidder
+    
+    # CLOSED
+    return @auction_closed_msg
+    #
     
     bid = @db[@unconfirmed_bids_coll].find_one('bidder_phone' => @phone)
     
