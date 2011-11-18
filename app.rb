@@ -18,7 +18,7 @@ get %r{/stats/?} do
   
   items = auction.get_all_items
   
-  # create items object for the template to use
+  # create auction items object for the template to use
   @items = Array.new
   i = 0
   items.each do |item|
