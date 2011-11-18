@@ -16,7 +16,7 @@ db[items_coll].find.sort('number').each do |prize|
   
   puts "#{prize['number']}. #{prize['name']}: size #{prize['bids'].size}"
   prize['bids'].each do |bid|
-    bidder = db[bidders_coll].find_one({ 'number' => bid['bidder_phone'] })
+    bidder = db[bidders_coll].find_one({ 'phone' => bid['bidder_phone'] })
     puts "    #{bidder['name']} #{bidder['number']} #{bid['bidder_number']}"
   end
 end
