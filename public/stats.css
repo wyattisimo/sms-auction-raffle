@@ -21,3 +21,12 @@ h3 { color: #06c; }
 	padding: 16px;
 	margin: 20px;
 }
+
+.info {
+	font-size: 10px;
+}
+
+.bid {
+	font-size: 13px;
+	padding: 4px 0 4px 20px;
+}
