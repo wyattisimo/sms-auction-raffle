@@ -1,5 +1,7 @@
 require 'rubygems'
 require 'mongo'
+require 'twilio-ruby'
+require './local_settings'
 
 db_name = 'rc_raffle'
 items_coll = 'prizes'
@@ -11,7 +13,9 @@ db = Mongo::Connection.new.db(db_name)
 
 db[winners_coll].remove
 
-puts "\nDRAWING RANDOM WINNERS FOR EACH RAFFLE ITEM...\n"
+puts
+puts "DRAWING RANDOM WINNERS FOR EACH RAFFLE ITEM..."
+puts
 
 # step through the prizes and choose random winners
 db[items_coll].find.sort('number').each do |prize|
@@ -23,6 +27,15 @@ db[items_coll].find.sort('number').each do |prize|
     r_index = rand(prize['bids'].size)
     winner = db[bidders_coll].find_one({ 'phone' => prize['bids'][r_index]['bidder_phone'] })
     puts "   WINNER: #{winner['name']} (#{winner['phone']})"
+    puts "   ...sending sms to the winner..."
+    msg = sprintf("Congratulations! You won a RaiseCache Raffle prize! #{prize['name']}: #{prize['info']}\nbla bla bla to redeem your prize.")
+    # @client = Twilio::REST::Client.new $account_sid, $auth_token
+    # @client.account.sms.messages.create(
+    #   :from => $raffle_number,
+    #   :to => winner['phone'],
+    #   :body => msg
+    # )
+
   end
   
   # list all tickets
