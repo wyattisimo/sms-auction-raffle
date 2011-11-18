@@ -9,7 +9,7 @@ class Raffle
   def initialize(phone)
     
     # messages
-    @help_msg = "*Text [first_name] [last_name] to register.\n*Text LIST for a list of prizes.\n*Text GET [quantity] to get more tickets.\n*Text [item_number] to use a ticket."
+    @help_msg = "*Text [first_name] [last_name] to register.\n*Text LIST for prize list.\n*Text GET [quantity] to get more tickets.\n*Text [item_number] to use a ticket."
     
     @exception_msg = "Oh, snap. Something broke. Call 858 248 0841 for tech support."
     
