@@ -11,12 +11,13 @@ winners_coll = 'winners'
 db = Mongo::Connection.new.db(db_name)
 
 
-if db[winners_coll] && db[winners_coll].find.size > 0 then
+if db[winners_coll] && db[winners_coll].find.count > 0 then
   
   puts
   puts "WINNERS WERE DRAWN AT #{db[winners_coll].find_one['ts']}"
   puts
   
+  # output the winners
   db[winners_coll].find.sort('prize_number').each do |w|
     puts "#{w['prize_number']}. #{w['prize_name']}: #{w['num_entries']} tickets entered"
     puts "   WINNER: #{w['winner_name']} (#{w['winner_phone']})"
