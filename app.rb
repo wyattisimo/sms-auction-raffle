@@ -19,6 +19,7 @@ get %r{/stats/?} do
   # AUCTION DATA
   items = auction.get_all_items
   @items = Array.new
+  @auction_net_revenue = 0
   i = 0
   items.each do |item|
     @items[i] = item
@@ -31,6 +32,7 @@ get %r{/stats/?} do
     @items[i]['bids'].sort_by! { |b| b['amount'] }
     @items[i]['bids'].reverse!
     @items[i]['high_bid'] = @items[i]['bids'].size > 0 ? @items[i]['bids'][0]['amount'] : 0
+    @auction_net_revenue += @items[i]['high_bid']
     i += 1
   end
   
