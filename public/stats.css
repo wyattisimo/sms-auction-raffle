@@ -16,11 +16,10 @@ h3 { color: #666; }
 
 strong { color: #c00; }
 
-.container {
-	
-}
+.container {}
 
 #auction, #raffle {
+	float: left;
 	border: 1px solid #999;
 	padding: 16px;
 	margin: 20px;
@@ -28,7 +27,7 @@ strong { color: #c00; }
 	color: #000;
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
-	border-radius: 10px;	
+	border-radius: 10px;
 }
 
 .bid {
