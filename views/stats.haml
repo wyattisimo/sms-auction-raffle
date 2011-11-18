@@ -4,7 +4,7 @@
 		- @items.each do |i|
 			%h3 #{i['number']}. #{i['name']}
 			- i['bids'].each do |b|
-				.bid #{b['amount']} -- #{b['name']} (#{b['phone']})
+				.bid $#{b['amount']} -- #{b['bidder_name']} (#{b['bidder_phone']})
 		
 	#raffle
 		%h2 Raffle stats

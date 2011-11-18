@@ -81,8 +81,15 @@ class Auction
   #
   # returns the entire collection of items
   #
-  def get_items
+  def get_all_items
     @db[@items_coll].find.sort('number')
+  end
+  
+  #
+  # returns the bidder specified by the given phone number
+  #
+  def get_bidder (phone)
+    @db[@bidders_coll].find_one({ 'phone' => phone })
   end
   
   
