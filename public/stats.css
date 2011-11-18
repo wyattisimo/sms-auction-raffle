@@ -14,7 +14,7 @@ h1, h2, h3 {
 h2 { color: #aaa; }
 h3 { color: #ccc; }
 
-strong { color: #fcc; }
+strong { color: #f99; }
 
 .container {
 	
@@ -24,7 +24,8 @@ strong { color: #fcc; }
 	border: 1px solid #999;
 	padding: 16px;
 	margin: 20px;
-	background-color: #555;
+	background-color: #666;
+	color: #000;
 }
 
 .bid {
