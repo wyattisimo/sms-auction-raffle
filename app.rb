@@ -23,7 +23,6 @@ get %r{/stats/?} do
   i = 0
   items.each do |item|
     @items[i] = item
-    @items[i]['high_bid'] = 0
     b = 0
     item['bids'].each do |bid|
       bidder = auction.get_bidder(bid['bidder_phone'])
@@ -32,7 +31,7 @@ get %r{/stats/?} do
     end
     @items[i]['bids'].sort_by! { |b| b['amount'] }
     @items[i]['bids'].reverse!
-    @items[i]['high_bid'] = @items[i]['bids'][0]['amount'] if @items[i]['bids'].size > 0
+    @items[i]['high_bid'] = @items[i]['bids'].size > 0 ? @items[i]['bids'][0]['amount'] : 0
     i += 1
   end
   
