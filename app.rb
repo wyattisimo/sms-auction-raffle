@@ -13,10 +13,10 @@ get '/' do
 end
 
 get %r{/stats/?} do
-  #auction = Auction.new(:admin)
+  auction = Auction.new(:admin)
   #raffle = Raffle.new(:admin)
   
-  @test = "hello"
+  @items = auction.get_items
   
   haml :stats
 end

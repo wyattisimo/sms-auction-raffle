@@ -1,7 +1,10 @@
 .container
 	#auction
 		%h2 Auction stats
-		%div data here
+		- @items.each do |i|
+			%h3 #{i['number']}. #{i['name']})
+			- i['bids'].sort.reverse.each do |b|
+				%div $#{b['amount']} -- #{b['name']} (#{b['phone']})
 		
 	#raffle
 		%h2 Raffle stats

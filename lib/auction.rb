@@ -79,6 +79,14 @@ class Auction
   end
   
   #
+  # returns the entire collection of items
+  #
+  def get_items
+    @db[@items_coll].find.sort('number')
+  end
+  
+  
+  #
   # returns the help msg
   #
   def get_help
