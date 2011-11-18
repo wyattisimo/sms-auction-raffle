@@ -31,13 +31,23 @@ db[items_coll].find.sort('number').each do |item|
     
     # notify winner
     puts "   ...sending sms to the winner..."
-    msg = sprintf("Yay! You won the RaiseCache auction for \"#{item['name']}\". Thanks for supporting RaiseCache and hackNY! We'll send a Venmo invoice shortly.")
+    msg = sprintf("Yay! You won the RaiseCache auction for \"#{item['name']}\". Thanks for supporting RaiseCache and hackNY!")
     puts "   #{msg}"
     # @client = Twilio::REST::Client.new $account_sid, $auth_token
     # @client.account.sms.messages.create(
     #   :from => $auction_number,
     #   :to => winner['phone'],
     #   :body => msg
+    # )
+    
+    # send Venmo invoice
+    puts "   ...sending Venmo sms to the winner..."
+    venmo_msg = "https://venmo.com/?txn=Pay&recipients=6513570214&amount=#{high['amount']}&note=for%20RaiseCache%20Raffle"
+    puts "Please pay for your auction item here: #{venmo_msg}"
+    # @client.account.sms.messages.create(
+    #   :from => $auction_number,
+    #   :to => winner['phone'],
+    #   :body => venmo_msg
     # )
   
     # save for posterity
