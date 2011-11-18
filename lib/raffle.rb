@@ -28,7 +28,7 @@ class Raffle
 
     @apply_msg = "Great! One raffle ticket has been entered into the drawing for prize %d (%s). You have %d raffle tickets remaining."
     @apply_err = "Invalid prize number. Text LIST to see a list of raffle prizes."
-    @apply_no_tickets_err = "You don't have any tickets. Text GET [quantity] to purchase more. Raffle tickets are $%d each."
+    @apply_no_tickets_err = "You don't have any tickets. Text ADD [quantity] to purchase more. Raffle tickets are $%d each."
     
     @add_msg = "Thanks! Tickets apply after payment. Pay with Venmo here:"
     @add_err = ""
