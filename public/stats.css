@@ -11,10 +11,10 @@ h1, h2, h3 {
 	padding: 0;
 	font-family: "trebuchet ms", helvetica, sans-serif;
 }
-h2 { color: #bbc; }
-h3 { color: #eef; }
+h2 { color: #bbb; }
+h3 { color: #ddd; }
 
-strong { color: #b00; }
+strong { color: #c00; }
 
 .container {
 	
@@ -24,6 +24,7 @@ strong { color: #b00; }
 	border: 1px solid #999;
 	padding: 16px;
 	margin: 20px;
+	background-color: #333;
 }
 
 .bid {
