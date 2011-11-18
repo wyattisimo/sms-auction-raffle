@@ -206,7 +206,7 @@ class Raffle
     @client = Twilio::REST::Client.new $account_sid, $auth_token
     @client.account.sms.messages.create(
       :from => $auction_number,
-      :to => b['bidder_phone'],
+      :to => @phone,
       :body => msg
     )
     
