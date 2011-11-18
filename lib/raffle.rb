@@ -20,9 +20,9 @@ class Raffle
 
     @not_registered_msg = "You must register before you can participate in the raffle. Please register by texting your first and last name. Text HELP for help."
     
-    @get_ticket_qty_msg = "You have %d raffle tickets."
+    @get_ticket_qty_msg = "You have %d raffle ticket%s."
     
-    @list_line = "%d %s\n"
+    @list_line = "%d. %s\n"
     @list_msg = "*Text [number] to apply your raffle ticket."
     @list_more_msg = "\n*Text MORE for more."
 
@@ -92,7 +92,7 @@ class Raffle
     
     bidder = @db[@bidders_coll].find_one({ 'phone' => @phone })
     
-    sprintf(@get_ticket_qty_msg, bidder['ticket_qty'])
+    sprintf(@get_ticket_qty_msg, bidder['ticket_qty'], bidder['ticket_qty'] == 1 ? '' : 's')
   end
   
   #
