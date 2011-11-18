@@ -28,7 +28,7 @@ class Raffle
 
     @apply_msg = "Great! One raffle ticket has been entered into the drawing for prize %d (%s). You have %d raffle tickets remaining."
     @apply_err = "Invalid prize number. Text LIST to see a list of raffle prizes."
-    @apply_no_tickets_err = "You don't have any tickets. Text GET [quantity] to purchase more. Raffle tickets are $1 each."
+    @apply_no_tickets_err = "You don't have any tickets. Text GET [quantity] to purchase more. Raffle tickets are $%d each."
     
     @add_msg = "Thanks! Tickets apply after payment. Pay with Venmo here:"
     @add_err = ""
@@ -41,6 +41,9 @@ class Raffle
     
     # initial number of tickets for new users
     @init_ticket_qty = 1
+    
+    # ticket price in dollars
+    @ticket_price = 10
     
     @phone = phone
     
@@ -170,7 +173,7 @@ class Raffle
     have_qty = bidder['ticket_qty'] ? bidder['ticket_qty'] : 0
     
     # ensure user has tickets
-    return @apply_no_tickets_err if have_qty == 0
+    return sprintf(@apply_no_tickets_err, @ticket_price) if have_qty == 0
     
     prize = @db[@items_coll].find_one('number' => prize_number)
     
@@ -215,8 +218,9 @@ class Raffle
   # send Venmo invoice for given number of tickets
   #
   def send_venmo_invoice(qty)
+    amount = qty * @ticket_price
     #651-357-0214
-    msg = "https://venmo.com/?txn=Pay&recipients=6513570214&amount=#{qty}&note=for%20RaiseCache%20Raffle"
+    msg = "https://venmo.com/?txn=Pay&recipients=6513570214&amount=#{amount}&note=for%20RaiseCache%20Raffle"
     @client = Twilio::REST::Client.new $account_sid, $auth_token
     @client.account.sms.messages.create(
       :from => $raffle_number,
