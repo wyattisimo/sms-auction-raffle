@@ -198,9 +198,7 @@ class Raffle
   def add_tickets (qty)
     return @not_registered_msg unless self.is_valid_bidder
 
-    bidder = @db[@bidders_coll].find_one({ 'phone' => @phone })
-    
-    #TODO send Venmo invoice for qty tickets
+    # send Venmo invoice for qty tickets
     #651-357-0214
     msg = "https://venmo.com/?txn=Pay&recipients=6513570214&amount=#{qty}&note=for%20RaiseCache%20Raffle"
     @client = Twilio::REST::Client.new $account_sid, $auth_token
