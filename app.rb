@@ -22,7 +22,7 @@ get %r{/stats/?} do
   @items.each do |i|
     i['bids'].each do |b|
       bidder = auction.get_bidder(b['bidder_phone'])
-      b['bidder_name'] = bidder['name']
+      b['bidder_name'] = "n.#{bidder['name']}"
     end
   end
   @items.rewind!
