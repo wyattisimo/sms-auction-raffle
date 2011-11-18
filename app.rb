@@ -39,6 +39,7 @@ get %r{/stats/?} do
   # RAFFLE DATA
   prizes = raffle.get_all_prizes
   @prizes = Array.new
+  @raffle_total_tickets = 0
   p = 0
   prizes.each do |prize|
     @prizes[p] = prize
@@ -48,6 +49,7 @@ get %r{/stats/?} do
       @prizes[p]['bids'][b]['bidder_name'] = bidder['name']
       b += 1
     end
+    @raffle_total_tickets += b
     @prizes[p]['bids'].sort_by! { |b| b['ts'] }
     @prizes[p]['bids'].reverse!
     p += 1

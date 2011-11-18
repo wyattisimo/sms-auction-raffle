@@ -17,7 +17,9 @@
 						$#{b['amount']} -- #{b['bidder_name']} (#{b['bidder_phone']}) -- Placed at: #{b['ts']} UTC
 		
 	#raffle
-		%h2 Raffle
+		%h2
+			Raffle | Total Tickets:
+			%strong #{@raffle_total_tickets}
 		- @prizes.each do |p|
 			%h3
 				#{p['number'].to_i}. #{p['name']} | Number of tickets:
