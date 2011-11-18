@@ -153,36 +153,16 @@ class Raffle
     # ensure valid prize
     return @apply_err if prize == nil
     
-    # see if a record for this user already exists
-    # if so, increment quantity
-    does_exist = false
-    prize['bids'].each do |b|
-      if b['bidder_phone'] == @phone then
-        b['quantity'] += apply_qty
-        does_exist = true
-        break
-      end
-    end
-    
-    # apply 1 ticket to item
-    if does_exist then
-      # update existing record
-      @db[@items_coll].update(
-        { 'number' => prize_number },
-        { '$set' => { 'bids' => prize['bids'] } }
-      )
-    else
-      # add a new record
-      new_bid = {
-        'ts' => Time.now.to_s,
-        'bidder_phone' => @phone,
-        'quantity' => apply_qty
-      }
-      @db[@items_coll].update(
-        { 'number' => prize_number },
-        { '$push' => { 'bids' => new_bid } }
-      )
-    end
+    # apply ticket
+    new_bid = {
+      'ts' => Time.now.to_s,
+      'bidder_phone' => @phone,
+      'quantity' => apply_qty
+    }
+    @db[@items_coll].update(
+      { 'number' => prize_number },
+      { '$push' => { 'bids' => new_bid } }
+    )
     
     # deduct 1 ticket from user
     bidder['ticket_qty'] = bidder['ticket_qty'] ? bidder['ticket_qty'] - 1 : 0
