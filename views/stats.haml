@@ -2,7 +2,8 @@
 	#auction
 		%h2 Auction
 		- @items.each do |i|
-			%h3 #{i['number'].to_i}. #{i['name']} | High bid:
+			%h3
+				#{i['number'].to_i}. #{i['name']} | High bid:
 				%strong nil
 			- i['bids'].each do |b|
 				.bid $#{b['amount']} -- #{b['bidder_name']} (#{b['bidder_phone']}) -- Placed at: #{b['ts']} UTC
