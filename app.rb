@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'sinatra'
+require 'haml'
 require 'twilio-ruby'
 require 'mongo'
 require './lib/auction'
@@ -9,6 +10,15 @@ bad_command_msg = "ehh... I don't know what to do with that. Text HELP for instr
 
 get '/' do
   "Stop looking at me."
+end
+
+get %r{/stats/?} do
+  #auction = Auction.new(:admin)
+  #raffle = Raffle.new(:admin)
+  
+  @test = "hello"
+  
+  haml :stats
 end
 
 #
