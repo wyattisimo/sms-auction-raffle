@@ -2,7 +2,7 @@
 	#auction
 		%h2 Auction stats
 		- @items.each do |i|
-			%h3 #{i['number']}. #{i['name']}: %span{font-style:italic} #{i['info']}
+			%h3 #{i['number']}. #{i['name']}: #{i['info']}
 			- i['bids'].each do |b|
 				.bid $#{b['amount']} -- #{b['bidder_name']} (#{b['bidder_phone']})
 		
