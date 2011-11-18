@@ -26,7 +26,30 @@ db[items_coll].find.sort('number').each do |item|
     high = item['bids'].last
     winner = db[bidders_coll].find_one({ 'phone' => high['bidder_phone'] })
     
-    puts "   WINNER: #{winner['name']} (#{winner['phone']}) #{high['bidder_phone']}"
+    puts "   HIGH BID: $#{high['amount']}"
+    puts "   WINNER:   #{winner['name']} (#{winner['phone']})"
+    
+    # notify winner
+    puts "   ...sending sms to the winner..."
+    msg = sprintf("Yay! You won the RaiseCache auction for \"#{prize['name']}\"\nThanks for supporting RaiseCache and hackNY! We'll send a Venmo invoice shortly.")
+    puts msg
+    # @client = Twilio::REST::Client.new $account_sid, $auth_token
+    # @client.account.sms.messages.create(
+    #   :from => $auction_number,
+    #   :to => winner['phone'],
+    #   :body => msg
+    # )
+  
+    # save for posterity
+    db[winners_coll].insert({
+      'ts' => Time.now.to_s,
+      'item_number' => item['number'],
+      'item_name' => item['name'],
+      'num_bids' => item['bids'].size,
+      'high_bid' => high['amount'],
+      'winner_name' => winner['name'],
+      'winner_phone' => winner['phone']
+    })
   end
   
 end
