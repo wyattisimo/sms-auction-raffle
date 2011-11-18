@@ -23,8 +23,8 @@ strong { color: #c00; }
 #auction, #raffle {
 	float: left;
 	border: 1px solid #999;
-	padding: 16px;
 	margin: 0 20px 20px 0;
+	padding: 16px;
 	background-color: #eee;
 	color: #000;
 	-webkit-border-radius: 10px;
@@ -33,9 +33,11 @@ strong { color: #c00; }
 }
 
 .bids {
-	border: 1px solid #999;
+	/*display: none;*/
+	border: 1px solid #ddd;
+	margin: 0 0 0 20px;
 	padding: 8px;
-	background-color: #eee;
+	background-color: #fff;
 	color: #000;
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
@@ -43,5 +45,5 @@ strong { color: #c00; }
 }
 .bid {
 	font-size: 13px;
-	padding: 4px 0 4px 20px;
+	padding: 4px 0;
 }
