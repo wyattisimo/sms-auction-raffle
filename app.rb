@@ -23,7 +23,7 @@ get %r{/stats/?} do
     i['bids'].each do |b|
       # bidder = auction.get_bidder(b['bidder_phone'])
       # b['bidder_name'] = bidder['name']
-      b.sort!.reverse!
+      puts 'hi'
     end
   end
   
