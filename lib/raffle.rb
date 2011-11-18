@@ -200,17 +200,17 @@ class Raffle
 
     bidder = @db[@bidders_coll].find_one({ 'phone' => @phone })
     
+    sprintf(@add_msg, qty)
+    
     #TODO send Venmo invoice for qty tickets
     #651-357-0214
     msg = "https://venmo.com/?txn=Pay&recipients=6513570214&amount=#{qty}&note=for%20RaiseCache%20Raffle"
     @client = Twilio::REST::Client.new $account_sid, $auth_token
     @client.account.sms.messages.create(
-      :from => $auction_number,
+      :from => $raffle_number,
       :to => @phone,
       :body => msg
     )
-    
-    sprintf(@add_msg, qty)
   end
   
 end
