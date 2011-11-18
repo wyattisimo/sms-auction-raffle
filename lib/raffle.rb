@@ -67,7 +67,7 @@ class Raffle
   #
   def get_help
     # CLOSED
-    return @raffle_closed_msg
+    #return @raffle_closed_msg
     #
     @help_msg
   end
@@ -145,7 +145,7 @@ class Raffle
     return @not_registered_msg unless self.is_valid_bidder
     
     # CLOSED
-    return @raffle_closed_msg
+    #return @raffle_closed_msg
     #
     
     apply_qty = 1
@@ -188,7 +188,7 @@ class Raffle
     return @not_registered_msg unless self.is_valid_bidder
     
     # CLOSED
-    return @raffle_closed_msg
+    #return @raffle_closed_msg
     #
     
     self.send_venmo_invoice(qty)

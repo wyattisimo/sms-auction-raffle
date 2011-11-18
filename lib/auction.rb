@@ -83,7 +83,7 @@ class Auction
   #
   def get_help
     # CLOSED
-    return @auction_closed_msg
+    #return @auction_closed_msg
     #
     @help_msg
   end
@@ -164,7 +164,7 @@ class Auction
     return @not_registered_msg unless self.is_valid_bidder
     
     # CLOSED
-    return @auction_closed_msg
+    #return @auction_closed_msg
     #
     
     amount = amount.to_i # quietly convert decimals to integers
@@ -199,7 +199,7 @@ class Auction
     return @not_registered_msg unless self.is_valid_bidder
     
     # CLOSED
-    return @auction_closed_msg
+    #return @auction_closed_msg
     #
     
     bid = @db[@unconfirmed_bids_coll].find_one('bidder_phone' => @phone)
