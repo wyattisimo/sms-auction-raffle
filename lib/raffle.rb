@@ -28,8 +28,8 @@ class Raffle
     @apply_err = "Invalid prize number. Text LIST to see a list of raffle prizes."
     @apply_no_tickets_err = "You don't have any tickets. Text GET [quantity] to purchase more. Raffle tickets are $1 each."
     
-    @purchase_msg = ""
-    @purchase_err = ""
+    @add_msg = "Thanks! We're send you a Venmo invoice for %d tickets. Your tickets will be added after you pay."
+    @add_err = ""
     # end messages
 
     # max number of items to send when list is requested
@@ -191,10 +191,16 @@ class Raffle
   end
   
   #
-  # get more tickets
+  # add more tickets
   #
-  def get_tickets (quantity)
+  def add_tickets (qty)
+    return @not_registered_msg unless self.is_valid_bidder
+
+    bidder = @db[@bidders_coll].find_one({ 'phone' => @phone })
     
+    #TODO send Venmo invoice for qty tickets
+    
+    sprintf(@add_msg, qty)
   end
   
 end

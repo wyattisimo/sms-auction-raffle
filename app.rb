@@ -121,9 +121,9 @@ get %r{/raffle/sms/?} do
     response = raffle.apply_ticket(msg)
   
   # get more tickets
-  when /^GET\s\d+$/i
+  when /^ADD\s\d+$/i
     qty = msg.split(' ')[1]
-    response = raffle.get_tickets(qty)
+    response = raffle.add_tickets(qty)
 
   # psheww-psheww-psheww!
   else
