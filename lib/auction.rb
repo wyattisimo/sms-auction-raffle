@@ -1,5 +1,7 @@
 require 'rubygems'
 require 'mongo'
+require 'twilio-ruby'
+require '../local_settings'
 
 #
 # handles all auction bidding functions
@@ -9,7 +11,7 @@ class Auction
   def initialize(phone)
     
     # messages
-    @help_msg = "* Text [first_name] [last_name] to register.\n* Text LIST for a list of items.\n* Text [item_number] for item info.\n* Text [number] $[amount] to bid."
+    @help_msg = "*Text [first_name] [last_name] to register.\n*Text LIST for a list of items.\n*Text [item_number] for item info.\n*Text [number] $[amount] to bid."
     
     @exception_msg = "Oh, snap. Something broke. Call 858 248 0841 for tech support."
     
@@ -22,17 +24,19 @@ class Auction
     @list_msg = "*Text [number] for info."
     @list_more_msg = "\n*Text MORE for more."
 
-    @info_msg = "%d. %s:\n%s\n*High bid: $%d\n*Text [number] $[amount] to bid."
+    @info_msg = "%d. %s:\n%s\nHigh bid: $%d\n*Text [number] $[amount] to bid."
     @info_err = "Invalid item. Text LIST to see a list of auction items."
     
     @bid_msg = "You are bidding $%d on auction item %d (%s). Text YES to confirm this bid. Text NO to cancel."
     @bid_low_err = "Sorry, your bid of $%d is too low. The high bid for item %d is $%d. Please increase your bid."
     @bid_invalid_err = "Invalid item. Text LIST to see a list of auction items."
 
-    @confirm_bid_msg = "Thank you! Your bid of $%d for auction item %d (%s) is confirmed. We will text you if you get outbid or if you are the winner."
+    @confirm_bid_msg = "Thank you! Your bid of $%d for auction item %d (%s) is confirmed. We will let you know if you are the winner."
     @confirm_bid_cancel_msg = "Okay. We've cancelled your bid of $%d for auction item %d. Text LIST to see other auction items."
     @confirm_bid_outbid_msg = "You've been outbid! The high bid for item %d is now $%d.\n* Text YES to automatically increase your bid to $%d.\n* Text [number] $[amount] to bid a different amount."
     @confirm_bid_exist_err = "You don't have any pending bids.\n* Text [number] $[amount] to bid."
+    
+    @outbid_msg = "You've been outbid on item %d (%s)! High bid is now $%d."
     # end messages
     
     # max number of items to send when list is requested
@@ -73,6 +77,13 @@ class Auction
   end
   
   #
+  # returns the help msg
+  #
+  def get_help
+    @help_msg
+  end
+  
+  #
   # registers a new bidder
   #
   def register (name)
@@ -107,7 +118,6 @@ class Auction
     i = 0
     @db[@items_coll].find.sort('number').each do |item|
       i = i+1
-      puts "i: #{i}, last: #{last_item}"
       if i > last_item then
         # add item to list
         list += sprintf(@list_line, item['number'], item['name'], self.get_high_bid(item['bids']))
@@ -212,7 +222,7 @@ class Auction
     new_bid = {
       'ts' => Time.now.to_s,
       'bidder_phone' => bid['bidder_phone'],
-      'amount' => bid['amount']
+      'amount' => bid['amount'].to_i
     }
     @db[@items_coll].update(
       { 'number' => bid['item_number'], 'bids' => { '$size' => bids ? bids.size : 0 } },
@@ -222,14 +232,26 @@ class Auction
     # remove unconfirmed bid record
     @db[@unconfirmed_bids_coll].remove('bidder_phone' => @phone)
     
-    sprintf(@confirm_bid_msg, bid['amount'], item['number'], item['name'])
+    # notify recent bidders that they are outbid
+    self.outbid_notify(item, new_bid['amount'], @phone)
+    
+    sprintf(@confirm_bid_msg, new_bid['amount'], item['number'], item['name'])
   end
   
-  #
-  # returns the help msg
-  #
-  def get_help
-    @help_msg
+  # Here marks /rob's first pass at Ruby.  God help ye.
+  def outbid_notify (item, amount)
+    @client = Twilio::REST::Client.new $account_sid, $auth_token
+    item['bids'].sort_by! { |b| b['amount'].to_i }
+    item['bids'].last(5).each do |b|
+      if b['bidder_phone'] != @phone then
+        @client.account.sms.messages.create(
+          :from => $auction_number,
+          :to => b['bidder_phone'],
+          :body => sprintf(@outbid_msg, item['number'], item['name'], amount)
+        )
+        puts "sending sms to #{b['bidder_phone']} . . ."
+      end
+    end
   end
   
 end
