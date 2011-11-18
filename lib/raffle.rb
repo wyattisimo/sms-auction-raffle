@@ -199,6 +199,8 @@ class Raffle
     return @not_registered_msg unless self.is_valid_bidder
     
     self.send_venmo_invoice(qty)
+    
+    return
   end
   
   #
