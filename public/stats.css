@@ -32,6 +32,15 @@ strong { color: #c00; }
 	border-radius: 10px;
 }
 
+.bids {
+	border: 1px solid #999;
+	padding: 8px;
+	background-color: #eee;
+	color: #000;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
 .bid {
 	font-size: 13px;
 	padding: 4px 0 4px 20px;

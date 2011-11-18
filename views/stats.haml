@@ -7,8 +7,9 @@
 				%strong $#{i['high_bid']}
 				| Number of bids:
 				%strong #{i['bids'].size}
-			- i['bids'].each do |b|
-				.bid $#{b['amount']} -- #{b['bidder_name']} (#{b['bidder_phone']}) -- Placed at: #{b['ts']} UTC
+			.bids
+				- i['bids'].each do |b|
+					.bid $#{b['amount']} -- #{b['bidder_name']} (#{b['bidder_phone']}) -- Placed at: #{b['ts']} UTC
 		
 	#raffle
 		%h2 Raffle
@@ -16,6 +17,7 @@
 			%h3
 				#{p['number'].to_i}. #{p['name']} | Number of tickets:
 				%strong #{p['bids'].size}
-			- p['bids'].each do |b|
-				.bid #{b['bidder_name']} (#{b['bidder_phone']}) -- Entered at: #{b['ts']} UTC
+			.bids
+				- p['bids'].each do |b|
+					.bid #{b['bidder_name']} (#{b['bidder_phone']}) -- Entered at: #{b['ts']} UTC
 		
