@@ -111,7 +111,11 @@ get %r{/raffle/sms/?} do
 
   # list raffle prizes
   when /^LIST$/i
-    response = raffle.get_list
+    response = raffle.get_list(nil)
+
+  # list more raffle items
+  when /^MORE$/i
+    response = raffle.get_list(true)
   
   # apply raffle ticket
   when /^\d+$/
