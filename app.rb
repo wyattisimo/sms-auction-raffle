@@ -102,8 +102,7 @@ get %r{/raffle/sms/?} do
 
   # register
   when /^[a-z-.]+\s[a-z-.]+$/i
-    info = msg.split ' '
-    response = raffle.register("#{info[0]} #{info[1]}", info[2])
+    response = raffle.register(msg)
   
   # get remaining number of tickets
   when /^QTY$/i
