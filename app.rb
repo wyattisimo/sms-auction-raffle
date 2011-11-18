@@ -21,8 +21,9 @@ get %r{/stats/?} do
   # add bidder names to the bids array
   @items.each do |i|
     i['bids'].each do |b|
-      bidder = auction.get_bidder(b['bidder_phone'])
-  #     b['bidder_name'] = bidder['name']
+      # bidder = auction.get_bidder(b['bidder_phone'])
+      # b['bidder_name'] = bidder['name']
+      b.sort!.reverse!
     end
   end
   
