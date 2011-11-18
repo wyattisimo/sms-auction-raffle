@@ -11,10 +11,10 @@ h1, h2, h3 {
 	padding: 0;
 	font-family: "trebuchet ms", helvetica, sans-serif;
 }
-h2 { color: #aaa; }
-h3 { color: #ccc; }
+h2 { color: #ccc; }
+h3 { color: #eee; }
 
-strong { color: #f99; }
+strong { color: #d77; }
 
 .container {
 	
@@ -24,7 +24,7 @@ strong { color: #f99; }
 	border: 1px solid #999;
 	padding: 16px;
 	margin: 20px;
-	background-color: #666;
+	background-color: #888;
 	color: #000;
 }
 
