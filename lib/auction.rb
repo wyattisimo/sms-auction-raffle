@@ -129,6 +129,7 @@ class Auction
     
     if do_more == true
       last_item = bidder['last_item'] == nil ? 0 : bidder['last_item']
+      last_item = 0 if last_item >= @db[@items_coll].find.size
     else
       last_item = 0
     end
