@@ -157,7 +157,7 @@ class Raffle
     # if so, increment quantity
     does_exist = false
     prize['bids'].each do |b|
-      if b['bidder_phone'] = @phone then
+      if b['bidder_phone'] == @phone then
         b['quantity'] += apply_qty
         does_exist = true
         break
