@@ -16,17 +16,21 @@ get %r{/stats/?} do
   auction = Auction.new('admin')
   #raffle = Raffle.new('admin')
   
-  @items = auction.get_all_items
+  items = auction.get_all_items
   
-  # add bidder names to the bids array
-  @items.each do |i|
-    i['bids'].map! do |b|
-      bidder = auction.get_bidder(b['bidder_phone'])
-      b['bidder_name'] = "n.#{bidder['name']}"
-      b
+  # create items object for the template to use
+  @items = Array.new
+  i = 0
+  items.each do |item|
+    @items[i] = item
+    b = 0
+    item['bids'].each do |bid|
+      bidder = auction.get_bidder(bid['bidder_phone'])
+      @items[i]['bids'][b]['bidder_name'] = "n.#{bidder['name']}"
+      b += 1
     end
+    i += 1
   end
-  @items.rewind!
   
   haml :stats
 end
