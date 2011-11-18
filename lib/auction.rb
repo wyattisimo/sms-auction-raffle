@@ -18,7 +18,7 @@ class Auction
     @register_msg = "Thanks for participating in the Raise Cache auction, %s! 100%% of proceeds go to hackNY. Text LIST to see a list of auction items. Text HELP for help."
     @register_err = "Hi there! You're already registered. Text LIST to see a list of auction items."
     
-    @not_registered_msg = "You must register before you can bid. Please register by texting your first and last name."
+    @not_registered_msg = "You must register before you can bid. Please register by texting your first and last name. Text HELP for help."
 
     @list_line = "%d. %s $%d\n"
     @list_msg = "*Text [number] for info."
