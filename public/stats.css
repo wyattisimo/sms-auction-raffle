@@ -14,17 +14,17 @@ h1, h2, h3 {
 h2 { color: #ccc; }
 h3 { color: #eee; }
 
-strong { color: #d77; }
+strong { color: #c00; }
 
 .container {
 	
 }
 
 #auction, #raffle {
-	border: 1px solid #999;
+	border: 1px solid #666;
 	padding: 16px;
 	margin: 20px;
-	background-color: #888;
+	background-color: #999;
 	color: #000;
 }
 
