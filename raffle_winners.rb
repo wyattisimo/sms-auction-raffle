@@ -29,6 +29,7 @@ db[items_coll].find.sort('number').each do |prize|
     puts "   WINNER: #{winner['name']} (#{winner['phone']})"
     puts "   ...sending sms to the winner..."
     msg = sprintf("Congratulations! You won a RaiseCache Raffle prize! #{prize['name']}: #{prize['info']}\nbla bla bla to redeem your prize.")
+    puts msg
     # @client = Twilio::REST::Client.new $account_sid, $auth_token
     # @client.account.sms.messages.create(
     #   :from => $raffle_number,
