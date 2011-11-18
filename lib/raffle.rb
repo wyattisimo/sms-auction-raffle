@@ -218,7 +218,7 @@ class Raffle
   # send Venmo invoice for given number of tickets
   #
   def send_venmo_invoice(qty)
-    amount = qty * @ticket_price
+    amount = qty.to_i * @ticket_price
     #651-357-0214
     msg = "https://venmo.com/?txn=Pay&recipients=6513570214&amount=#{amount}&note=for%20RaiseCache%20Raffle"
     @client = Twilio::REST::Client.new $account_sid, $auth_token
