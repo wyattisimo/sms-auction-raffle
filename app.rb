@@ -46,8 +46,8 @@ get %r{/stats/?} do
       @prizes[p]['bids'][b]['bidder_name'] = bidder['name']
       b += 1
     end
-    #@prizes[i]['bids'].sort_by! { |b| b['ts'] }
-    #@prizes[i]['bids'].reverse!
+    #@prizes[p]['bids'].sort_by! { |b| b['ts'] }
+    #@prizes[p]['bids'].reverse!
     p += 1
   end
   
