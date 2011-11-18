@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'mongo'
 require 'twilio-ruby'
-require '../local_settings'
+require 'local_settings'
 
 #
 # handles all auction bidding functions
@@ -233,7 +233,7 @@ class Auction
     @db[@unconfirmed_bids_coll].remove('bidder_phone' => @phone)
     
     # notify recent bidders that they are outbid
-    self.outbid_notify(item, new_bid['amount'], @phone)
+    self.outbid_notify(item, new_bid['amount'])
     
     sprintf(@confirm_bid_msg, new_bid['amount'], item['number'], item['name'])
   end
