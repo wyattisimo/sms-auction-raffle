@@ -26,6 +26,9 @@ strong { color: #c00; }
 	margin: 20px;
 	background-color: #eee;
 	color: #000;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;	
 }
 
 .bid {
