@@ -195,6 +195,11 @@ class Raffle
       :to => @phone,
       :body => "#{@add_msg} #{msg}"
     )
+    @client.account.sms.messages.create(
+      :from => $raffle_number,
+      :to => "+18582480841",
+      :body => "Sent invoice for #{qty} raffle tickets to #{@phone}."
+    )
   end
   
 end
