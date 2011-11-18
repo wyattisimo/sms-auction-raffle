@@ -8,8 +8,11 @@
 				| Number of bids:
 				%strong #{i['bids'].size}
 			.bids
+				- count = 0
 				- i['bids'].each do |b|
-					.bid $#{b['amount']} -- #{b['bidder_name']} (#{b['bidder_phone']}) -- Placed at: #{b['ts']} UTC
+					- color = count == 0 ? '#c00' : 'inherit'
+					.bid{:style => "color:#{color};"}
+						$#{b['amount']} -- #{b['bidder_name']} (#{b['bidder_phone']}) -- Placed at: #{b['ts']} UTC
 		
 	#raffle
 		%h2 Raffle
