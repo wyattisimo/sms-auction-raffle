@@ -2,7 +2,9 @@
 	#auction
 		%h2 Auction stats
 		- @items.each do |i|
-			%h3 #{i['number']}. (#{i['name']})
+			%h3 #{i['number']}. #{i['name']}
+			- i['bids'].sort.reverse.each do |b|
+				.bid #{b['amount']} -- #{b['name']} (#{b['phone']})
 		
 	#raffle
 		%h2 Raffle stats
