@@ -12,7 +12,7 @@ h1, h2, h3 {
 h2 { color: #556; }
 h3 { color: #06c; }
 
-b { color: #c00; }
+strong { color: #c00; }
 
 .container {
 	
