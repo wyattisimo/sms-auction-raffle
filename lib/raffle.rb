@@ -33,7 +33,7 @@ class Raffle
     @add_msg = "Thanks! Tickets apply after payment. Pay with Venmo here:"
     @add_err = ""
     
-    @raffle_closed_msg = "Thanks for participating! The RaiseCache raffle is now closed. RaiseCache for hackNY was a huge success!"
+    @raffle_closed_msg = "Thanks for participating! The RaiseCache raffle is now closed. RaiseCache for hackNY was a huge success! Winners will be notified shortly."
     # end messages
 
     # max number of items to send when list is requested
@@ -66,6 +66,9 @@ class Raffle
   # returns the help msg
   #
   def get_help
+    # CLOSED
+    return @raffle_closed_msg
+    #
     @help_msg
   end
   
