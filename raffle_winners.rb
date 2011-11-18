@@ -27,8 +27,10 @@ db[items_coll].find.sort('number').each do |prize|
     r_index = rand(prize['bids'].size)
     winner = db[bidders_coll].find_one({ 'phone' => prize['bids'][r_index]['bidder_phone'] })
     puts "   WINNER: #{winner['name']} (#{winner['phone']})"
+    
+    # notify winner
     puts "   ...sending sms to the winner..."
-    msg = sprintf("Congratulations! You won a RaiseCache Raffle prize! #{prize['name']}: #{prize['info']}\nbla bla bla to redeem your prize.")
+    msg = sprintf("Congratulations! You won a RaiseCache Raffle prize: (#{prize['name']}).\nbla bla bla to redeem your prize.")
     puts msg
     # @client = Twilio::REST::Client.new $account_sid, $auth_token
     # @client.account.sms.messages.create(
@@ -36,7 +38,15 @@ db[items_coll].find.sort('number').each do |prize|
     #   :to => winner['phone'],
     #   :body => msg
     # )
-
+    
+    # save for posterity
+    db[winners_coll].insert({
+      'ts' => Time.now.to_s,
+      'prize_number' => prize['number'],
+      'prize_name' => prize['name'],
+      'winner_name' => winner['name'],
+      'winner_phone' => winner['phone']
+    })
   end
   
   # list all tickets
