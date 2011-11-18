@@ -96,11 +96,19 @@ get %r{/raffle/sms/?} do
   
   case msg
   
+  # show help
+  when /^HELP$/i
+    response = raffle.get_help
+
   # register
   when /^[a-z-.]+\s[a-z-.]+\s[a-z0-9]+$/i
     info = msg.split ' '
     response = raffle.register("#{info[0]} #{info[1]}", info[2])
   
+  # get remaining number of tickets
+  when /^QTY$/i
+    response = raffle.get_ticket_qty
+
   # list raffle prizes
   when /^LIST$/i
     response = raffle.get_list
@@ -110,10 +118,11 @@ get %r{/raffle/sms/?} do
     bid = msg.split ' '
     response = raffle.apply_ticket(bid[0], bid[1].sub('$',''))
   
-  # show help
-  when /^HELP$/i
-    response = raffle.get_help
-  
+  # get more tickets
+  when /^GET\s\d+$/i
+    qty = msg.split(' ')[1]
+    response = raffle.get_tickets(qty)
+
   # psheww-psheww-psheww!
   else
     response = bad_command_msg
