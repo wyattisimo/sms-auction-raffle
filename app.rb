@@ -25,8 +25,6 @@ get %r{/stats/?} do
       b['bidder_name'] = "n.#{bidder['name']}"
       b
     end
-    i['bids'].sort_by! { |b| b['amount'] }
-    i['bids'].reverse!
   end
   @items.rewind!
   
