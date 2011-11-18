@@ -2,9 +2,9 @@
 	#auction
 		%h2 Auction
 		- @items.each do |i|
-			%h3 #{i['number']}. #{i['name']} -- High bid: $#{i['high_bid']} -- Number of bids: #{i['bids'].size}
+			%h3 #{i['number']}. #{i['name']} -- High bid: #{i['high_bid']} -- Number of bids: #{i['bids'].size}
 			- i['bids'].each do |b|
-				.bid $#{b['amount']} -- #{b['bidder_name']} (#{b['bidder_phone']}) -- Placed at: #{b['ts']} UTC
+				.bid $#{b['amount']} -- #{b['bidder_name']} (#{b['bidder_phone']}) -- Placed at: #{b['ts']}
 		
 	#raffle
 		%h2 Raffle
