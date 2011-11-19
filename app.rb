@@ -135,7 +135,7 @@ post %r{/raffle/payment/?} do
   "#{params[:foo]}"
 end
 get %r{/raffle/add/?} do
-  raffle = Raffle.new params[:p]
+  raffle = Raffle.new("+#{params[:p]}")
   raffle.do_add_tickets params[:a]
 end
 
