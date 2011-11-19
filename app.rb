@@ -134,7 +134,7 @@ end
 # receive venmo payment notices
 post %r{/raffle/payment/?} do
   raw = request.env['rack.input'].read
-  "foo: #{params[:foo]}\n\n#{raw}\n\npayments: #{raw[:payments]}"
+  "foo: #{params[:foo]}\n\n#{raw}\n\npayments:"
 end
 get %r{/raffle/add/?} do
   raffle = Raffle.new "+#{params[:p]}"
