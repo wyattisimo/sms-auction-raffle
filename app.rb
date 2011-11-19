@@ -3,6 +3,7 @@ require 'sinatra'
 require 'haml'
 require 'twilio-ruby'
 require 'mongo'
+require 'json'
 require './lib/auction'
 require './lib/raffle'
 
@@ -133,8 +134,7 @@ end
 # receive venmo payment notices
 post %r{/raffle/payment/?} do
   raw = request.env["rack.input"].read
-  "#{params[:foo]}"
-  "#{raw}"
+  "foo: #{params[:foo]}\n\n#{raw}\n\npayments: #{raw.payments}"
 end
 get %r{/raffle/add/?} do
   raffle = Raffle.new "+#{params[:p]}"
