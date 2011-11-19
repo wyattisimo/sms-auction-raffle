@@ -5,6 +5,7 @@ require 'twilio-ruby'
 require 'mongo'
 require 'json'
 require 'base64'
+require 'openssl'
 require './lib/auction'
 require './lib/raffle'
 
@@ -134,11 +135,13 @@ end
 
 # receive venmo payment notices
 post %r{/raffle/payment/?} do
+  key = 'CF9cYZfyw5ZevMW5N5TALahEWVdUmwA4'
   req = JSON.parse(request.env['rack.input'].read, {symbolize_names:true})
   sig, payload = req[:payments].split '.'
-  sig = Base64.urlsafe_decode64("#{sig}=")
+  #sig = Base64.urlsafe_decode64("#{sig}=")
+  yo = OpenSSL::HMAC.digest('sha1', key, payload)
   payload = Base64.decode64("#{payload}=")
-  "#{sig}\n\n#{payload}"
+  "#{sig}\n\n#{yo}\n\n#{payload}"
 end
 get %r{/raffle/add/?} do
   raffle = Raffle.new "+#{params[:p]}"
