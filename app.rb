@@ -136,8 +136,8 @@ end
 post %r{/raffle/payment/?} do
   req = JSON.parse(request.env['rack.input'].read, {symbolize_names:true})
   sig = req[:payments].split '.'
-  decoded1 = Base64.decode(sig[0])
-  decoded2 = Base64.decode(sig[1])
+  decoded1 = sig[0]#Base64.decode(sig[0])
+  decoded2 = sig[1]#Base64.decode(sig[1])
   "#{req[:payments]}\n\n#{decoded1}\n\n#{decoded2}"
 end
 get %r{/raffle/add/?} do
