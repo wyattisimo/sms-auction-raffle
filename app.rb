@@ -141,7 +141,12 @@ post %r{/raffle/payment/?} do
   sig = Base64.decode64("#{sig}=")
   yo = OpenSSL::HMAC.digest('sha1', key, payload)
   payload = Base64.decode64("#{payload}=")
-  "#{sig}\n\n#{yo}\n\n#{payload}"
+  r = "#{sig}\n\n#{yo}\n\n#{payload}"
+  payload = JSON.parse(payload,  {symbolize_names:true})
+  payload.each do |p|
+    r += "\n\n#{p[:from_user][:email]} --> #{p[:to_user][:email]}"
+  end
+  r
 end
 get %r{/raffle/add/?} do
   raffle = Raffle.new "+#{params[:p]}"
