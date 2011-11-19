@@ -132,7 +132,7 @@ end
 
 # receive venmo payment notices
 post %r{/raffle/payment/?} do
-  "#{params}"
+  "#{params[:foo]}"
 end
 
 get %r{/raffle/voice/?} do
