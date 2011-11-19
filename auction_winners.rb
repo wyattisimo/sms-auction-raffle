@@ -60,13 +60,17 @@ db[items_coll].find.sort('number').each do |item|
     puts "   ...sending SMS to the losers..."
     lose_msg = "Thanks for participating in the RaiseCache auction for \"#{item['name']}\"! Yours was not the highest bid, but RaiseCache for hackNY was a huge success!"
     
+    sent = Array.new
     item['bids'].each do |bid|
-      puts "   (#{bid['bidder_phone']}) #{lose_msg}"
-      # @client.account.sms.messages.create(
-      #   :from => $auction_number,
-      #   :to => '+18582480841',#winner['phone'],
-      #   :body => lose_msg
-      # )
+      if sent.index(bid['bidder_phone']) === nil then
+        puts "   (#{bid['bidder_phone']}) #{lose_msg}"
+        # @client.account.sms.messages.create(
+        #   :from => $auction_number,
+        #   :to => '+18582480841',#winner['phone'],
+        #   :body => lose_msg
+        # )
+      end
+      sent.push bid['bidder_phone']
     end
     
   end
