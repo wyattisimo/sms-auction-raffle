@@ -136,9 +136,9 @@ end
 post %r{/raffle/payment/?} do
   req = JSON.parse(request.env['rack.input'].read, {symbolize_names:true})
   sig, payload = req[:payments].split '.'
-  decoded1 = sig#Base64.decode(sig[0])
-  decoded2 = payload#Base64.decode(sig[1])
-  "#{decoded1}\n\n#{decoded2}"
+  sig = Base64.decode64(sig)
+  payload = Base64.decode64(payload)
+  "#{sig}\n\n#{payload}"
 end
 get %r{/raffle/add/?} do
   raffle = Raffle.new "+#{params[:p]}"
