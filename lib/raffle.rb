@@ -217,6 +217,8 @@ class Raffle
   def do_add_tickets (qty)
     return @not_registered_msg unless self.is_valid_bidder
     
+    qty = qty.to_i
+    
     bidder = @db[@bidders_coll].find_one({ 'phone' => @phone })
     bidder['ticket_qty'] += qty
     @db[@bidders_coll].save bidder
