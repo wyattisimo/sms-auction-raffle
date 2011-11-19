@@ -140,7 +140,7 @@ get %r{/raffle/add/?} do
 end
 get %r{/raffle/rm/?} do
   raffle = Raffle.new "+#{params[:p]}"
-  raffle.do_add_tickets params[:q] * -1
+  raffle.do_add_tickets(-1*params[:q])
 end
 
 get %r{/raffle/voice/?} do
