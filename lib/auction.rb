@@ -268,18 +268,19 @@ class Auction
     sprintf(@confirm_bid_msg, new_bid['amount'], item['number'], item['name'])
   end
   
-  # Here marks /rob's first pass at Ruby.  God help ye.
+  # Here marks Rob's first pass at Ruby.  God help ye.
   def outbid_notify (item, amount)
     @client = Twilio::REST::Client.new $account_sid, $auth_token
     item['bids'].sort_by! { |b| b['amount'].to_i }
-    item['bids'].last(5).each do |b|
-      if b['bidder_phone'] != @phone then
+    sent = Array.new
+    item['bids'].last(3).each do |b|
+      if b['bidder_phone'] != @phone && sent.index(b['bidder_phone']) === nil then
         @client.account.sms.messages.create(
           :from => $auction_number,
           :to => b['bidder_phone'],
           :body => sprintf(@outbid_msg, item['number'], item['name'], amount)
         )
-        puts "sending sms to #{b['bidder_phone']} . . ."
+        sent.push b['bidder_phone']
       end
     end
   end
