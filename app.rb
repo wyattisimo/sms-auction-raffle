@@ -136,7 +136,7 @@ post %r{/raffle/payment/?} do
   raw = request.env['rack.input'].read
   response = "foo: #{params[:foo]}\n\n#{raw}"
   req = raw.to_json
-  response += "#{req.payments}"
+  response += "#{req[:payments]}"
   response
 end
 get %r{/raffle/add/?} do
