@@ -227,6 +227,10 @@ class Raffle
     sprintf("%s %d tickets for %s", qty < 0 ? 'Removed' : 'Added', qty, @phone)
   end
   
+  def log_payment (data)
+    @db['payments'].insert({ 'raw' => data })
+  end
+  
   #
   # send Venmo invoice for given number of tickets
   #
