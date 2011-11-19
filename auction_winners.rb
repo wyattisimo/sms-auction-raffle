@@ -36,11 +36,12 @@ db[items_coll].find.sort('number').each do |item|
     puts "   WINNER:   #{winner['name']} (#{winner['phone']})"
     
     puts "   ...sending SMS to the winner..."
-    win_msg = sprintf("Yay! You won the RaiseCache auction for \"#{item['name']}\"! Pls make your donation of $%d at http://bit.ly/c4hackny. We'll contact you to arrange delivery.", high['amount'])
+    # win_msg = sprintf("Yay! You won the RaiseCache auction for \"%s\"! Pls make your donation of $%d at http://bit.ly/c4hackny. We'll contact you to arrange delivery.", item['name'], high['amount'])
+    win_msg = sprintf("You rec'd conflicting msgs if you had multiple bids on 1 item. To clarify, you DID win \"%s\" and may pay $%d at http://bit.ly/c4hackny. Thank you!", item['name'], high['amount'])
     puts "   #{win_msg}"
     # @client.account.sms.messages.create(
     #   :from => $auction_number,
-    #   :to => winner['phone'],
+    #   :to => '+18582480841',#winner['phone'],
     #   :body => win_msg
     # )
   
