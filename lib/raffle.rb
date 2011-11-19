@@ -221,6 +221,7 @@ class Raffle
     
     bidder = @db[@bidders_coll].find_one({ 'phone' => @phone })
     bidder['ticket_qty'] += qty
+    bidder['ticket_qty'] = 0 if bidder['ticket_qty'] < 0
     @db[@bidders_coll].save bidder
     
     sprintf("%s %d tickets for %s", qty < 0 ? 'Removed' : 'Added', qty, @phone)
