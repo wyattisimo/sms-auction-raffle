@@ -17,7 +17,6 @@ puts "AUCTION WINNERS..."
 puts
 
 # step through auction items and print winners
-test = 1
 db[items_coll].find.sort('number').each do |item|
   
   puts "#{item['number']}. #{item['name']}: #{item['bids'].size} bids entered"
@@ -39,13 +38,11 @@ db[items_coll].find.sort('number').each do |item|
     puts "   ...sending SMS to the winner..."
     win_msg = sprintf("Yay! You won the RaiseCache auction for \"#{item['name']}\"! Pls make your donation of $%d at http://bit.ly/c4hackny. We'll contact you to arrange delivery.", high['amount'])
     puts "   #{win_msg}"
-    if test == 1 then
     @client.account.sms.messages.create(
       :from => $auction_number,
-      :to => '+18582480841',#winner['phone'],
+      :to => winner['phone'],
       :body => win_msg
     )
-    end
   
     # save winner for posterity
     db[winners_coll].insert({
@@ -67,18 +64,15 @@ db[items_coll].find.sort('number').each do |item|
     item['bids'].each do |bid|
       if sent.index(bid['bidder_phone']) === nil then
         puts "   (#{bid['bidder_phone']}) #{lose_msg}"
-        if test == 1 then
         @client.account.sms.messages.create(
           :from => $auction_number,
-          :to => '+18582480841',#bid['bidder_phone'],
+          :to => bid['bidder_phone'],
           :body => lose_msg
         )
-        end
       end
       sent.push bid['bidder_phone']
     end
     
   end
   
-  test = 0
 end
