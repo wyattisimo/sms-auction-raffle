@@ -137,7 +137,7 @@ post %r{/raffle/payment/?} do
   req = JSON.parse(request.env['rack.input'].read, {symbolize_names:true})
   sig, payload = req[:payments].split '.'
   sig = Base64.urlsafe_decode64("#{sig}=")
-  payload = Base64.urlsafe_decode64("#{payload}=")
+  payload = Base64.decode64(payload)
   "#{sig}\n\n#{payload}"
 end
 get %r{/raffle/add/?} do
