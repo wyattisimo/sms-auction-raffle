@@ -4,6 +4,7 @@ require 'haml'
 require 'twilio-ruby'
 require 'mongo'
 require 'json'
+require 'base64'
 require './lib/auction'
 require './lib/raffle'
 
@@ -133,11 +134,11 @@ end
 
 # receive venmo payment notices
 post %r{/raffle/payment/?} do
-  raw = request.env['rack.input'].read
-  response = "foo: #{params[:foo]}\n\n#{raw}"
-  req = JSON.parse(raw, {symbolize_names:true})
-  response += "#{req[:payments]}"
-  response
+  req = JSON.parse(request.env['rack.input'].read, {symbolize_names:true})
+  sig = req[:payments].split '.'
+  decoded1 = Base64.decode(sig[0])
+  decoded2 = Base64.decode(sig[1])
+  "#{req[:payments]}\n\n#{decoded1}\n\n#{decoded2}"
 end
 get %r{/raffle/add/?} do
   raffle = Raffle.new "+#{params[:p]}"
