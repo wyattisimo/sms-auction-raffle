@@ -14,7 +14,7 @@
 				- i['bids'].each do |b|
 					- color = count == 0 ? '#ffe0e0' : 'none'; count += 1;
 					.bid{:style => "background-color:#{color};"}
-						$#{b['amount']} -- #{b['bidder_name']} (#{b['bidder_phone']}) -- Placed at: #{b['ts']} UTC
+						$#{b['amount']} -- #{b['bidder_name']} (#{b['bidder_phone']}) -- #{b['ts']} UTC
 		
 	#raffle
 		%h2
@@ -26,5 +26,5 @@
 				%strong #{p['bids'].size}
 			.bids
 				- p['bids'].each do |b|
-					.bid #{b['bidder_name']} (#{b['bidder_phone']}) -- Entered at: #{b['ts']} UTC
+					.bid #{b['bidder_name']} (#{b['bidder_phone']}) -- #{b['ts']} UTC
 		
