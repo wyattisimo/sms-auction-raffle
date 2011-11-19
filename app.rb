@@ -12,6 +12,10 @@ get '/' do
   "Stop looking at me."
 end
 
+#
+# stats
+#
+
 get %r{/stats/?} do
   auction = Auction.new('admin')
   raffle = Raffle.new('admin')
@@ -125,6 +129,11 @@ end
 #
 # RAFFLE
 #
+
+# receive venmo payment notices
+get %r{/raffle/payment/?} do
+  "payment"
+end
 
 get %r{/raffle/voice/?} do
   headers['Content-Type'] = 'text/xml; charset=utf8'
