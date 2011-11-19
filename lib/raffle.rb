@@ -219,7 +219,7 @@ class Raffle
     
     bidder = @db[@bidders_coll].find_one({ 'phone' => @phone })
     bidder['ticket_qty'] += qty
-    @db[@bidders_coll] save bidder
+    @db[@bidders_coll].save bidder
   end
   
   #
