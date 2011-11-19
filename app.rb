@@ -138,7 +138,7 @@ post %r{/raffle/payment/?} do
   key = 'CF9cYZfyw5ZevMW5N5TALahEWVdUmwA4'
   req = JSON.parse(request.env['rack.input'].read, {symbolize_names:true})
   sig, payload = req[:payments].split '.'
-  #sig = Base64.urlsafe_decode64("#{sig}=")
+  sig = Base64.decode64("#{sig}=")
   yo = OpenSSL::HMAC.digest('sha1', key, payload)
   payload = Base64.decode64("#{payload}=")
   "#{sig}\n\n#{yo}\n\n#{payload}"
