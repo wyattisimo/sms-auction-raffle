@@ -214,6 +214,7 @@ class Raffle
     return
   end
   
+  # credit tickets to the user
   def do_add_tickets (qty)
     return @not_registered_msg unless self.is_valid_bidder
     
@@ -227,6 +228,7 @@ class Raffle
     sprintf("%s %d tickets for %s", qty < 0 ? 'Removed' : 'Added', qty, @phone)
   end
   
+  # log Venmo payment receipt
   def log_payment (data)
     @db['payments'].insert({ 'raw' => data })
   end
