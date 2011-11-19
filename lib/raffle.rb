@@ -214,6 +214,14 @@ class Raffle
     return
   end
   
+  def do_add_tickets (qty)
+    return @not_registered_msg unless self.is_valid_bidder
+    
+    bidder = @db[@bidders_coll].find_one({ 'phone' => @phone })
+    bidder['ticket_qty'] += qty
+    @db[@bidders_coll] save bidder
+  end
+  
   #
   # send Venmo invoice for given number of tickets
   #
