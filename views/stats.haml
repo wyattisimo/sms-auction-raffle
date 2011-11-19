@@ -3,6 +3,7 @@
 		%h2
 			Auction | Net Revenue:
 			%strong $#{@auction_net_revenue}
+			[CLOSED]
 		- @items.each do |i|
 			%h3
 				#{i['number'].to_i}. #{i['name']} | High bid:
