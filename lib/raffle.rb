@@ -220,6 +220,8 @@ class Raffle
     bidder = @db[@bidders_coll].find_one({ 'phone' => @phone })
     bidder['ticket_qty'] += qty
     @db[@bidders_coll].save bidder
+    
+    sprintf("Added %d tickets for %s", qty, @phone)
   end
   
   #
