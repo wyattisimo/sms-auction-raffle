@@ -39,11 +39,11 @@ db[items_coll].find.sort('number').each do |item|
     # win_msg = sprintf("Yay! You won the RaiseCache auction for \"%s\"! Pls make your donation of $%d at http://bit.ly/c4hackny. We'll contact you to arrange delivery.", item['name'], high['amount'])
     win_msg = sprintf("You rec'd conflicting msgs if you had multiple bids on 1 item. To clarify, you DID win \"%s\" and may pay $%d at http://bit.ly/c4hackny. Thank you!", item['name'], high['amount'])
     puts "   #{win_msg}"
-    # @client.account.sms.messages.create(
-    #   :from => $auction_number,
-    #   :to => '+18582480841',#winner['phone'],
-    #   :body => win_msg
-    # )
+    @client.account.sms.messages.create(
+      :from => $auction_number,
+      :to => '+18582480841',#winner['phone'],
+      :body => win_msg
+    )
   
     # save winner for posterity
     db[winners_coll].insert({
@@ -58,21 +58,21 @@ db[items_coll].find.sort('number').each do |item|
     
     # notify losers ##############
     
-    puts "   ...sending SMS to the losers..."
-    lose_msg = "Thanks for participating in the RaiseCache auction for \"#{item['name']}\"! Yours was not the highest bid, but RaiseCache for hackNY was a huge success!"
-    
-    sent = Array.new
-    item['bids'].each do |bid|
-      if sent.index(bid['bidder_phone']) === nil then
-        puts "   (#{bid['bidder_phone']}) #{lose_msg}"
-        # @client.account.sms.messages.create(
-        #   :from => $auction_number,
-        #   :to => bid['bidder_phone'],
-        #   :body => lose_msg
-        # )
-      end
-      sent.push bid['bidder_phone']
-    end
+    # puts "   ...sending SMS to the losers..."
+    # lose_msg = "Thanks for participating in the RaiseCache auction for \"#{item['name']}\"! Yours was not the highest bid, but RaiseCache for hackNY was a huge success!"
+    # 
+    # sent = Array.new
+    # item['bids'].each do |bid|
+    #   if sent.index(bid['bidder_phone']) === nil then
+    #     puts "   (#{bid['bidder_phone']}) #{lose_msg}"
+    #     # @client.account.sms.messages.create(
+    #     #   :from => $auction_number,
+    #     #   :to => bid['bidder_phone'],
+    #     #   :body => lose_msg
+    #     # )
+    #   end
+    #   sent.push bid['bidder_phone']
+    # end
     
   end
   
