@@ -138,6 +138,10 @@ get %r{/raffle/add/?} do
   raffle = Raffle.new "+#{params[:p]}"
   raffle.do_add_tickets params[:q]
 end
+get %r{/raffle/rm/?} do
+  raffle = Raffle.new "+#{params[:p]}"
+  raffle.do_add_tickets params[:q] * -1
+end
 
 get %r{/raffle/voice/?} do
   headers['Content-Type'] = 'text/xml; charset=utf8'

@@ -223,7 +223,7 @@ class Raffle
     bidder['ticket_qty'] += qty
     @db[@bidders_coll].save bidder
     
-    sprintf("Added %d tickets for %s", qty, @phone)
+    sprintf("%s %d tickets for %s", qty < 0 ? 'Removed' : 'Added', qty, @phone)
   end
   
   #
