@@ -41,7 +41,7 @@ db[items_coll].find.sort('number').each do |item|
     puts "   #{win_msg}"
     @client.account.sms.messages.create(
       :from => $auction_number,
-      :to => '+18582480841',#winner['phone'],
+      :to => winner['phone'],
       :body => win_msg
     )
   
